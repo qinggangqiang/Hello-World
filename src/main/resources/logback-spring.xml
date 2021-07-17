@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<configuration>
+
+    <!--设置小的配置项-->
+    <!--这个配置项需要用到这个类ConsoleAppender去处理-->
+    <!--配置控制台的输出-->
+    <appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">
+        <!--展现的形式-->
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <!--这里面放的就是具体的格式-->
+            <pattern>
+                %d - %msg%n
+            </pattern>
+        </layout>
+    </appender>
+
+    <!--配置文件的输出-->
+    <!--注意：起名字时注意一定要是驼峰命名格式-->
+    <!--使用RollingFileAppender处理是因为想每天输出一个日志文件：滚动的文件输出-->
+    <appender name="fileInfoLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>DENY</onMatch><!--deny:禁止-->
+            <onMismatch>ACCEPT</onMismatch><!--接受-->
+        </filter>
+        <encoder>
+            <pattern>
+                %msg%n
+            </pattern>
+        </encoder>
+        <!--还需要配置一个滚动的策略-->
+        <!--使用TimeBasedRollingPolicy：按时间来滚动-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--配置路径-->
+            <fileNamePattern>
+                E:\log\sell\info.%d.log
+            </fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <!--使用RollingFileAppender处理是因为想每天输出一个日志文件：滚动的文件输出-->
+    <appender name="fileErrorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--添加过滤：不然和info打出的日志一样-->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <!--注意：在info的日志中还是会出现error的日志信息，在info中添加过滤也是没有效果的-->
+            <!--原因是：级别不同  error的级别是40 info的级别是20  则就使用另外的类-->
+            <level>ERROR</level>
+        </filter>
+        <encoder>
+            <pattern>
+                %msg%n
+            </pattern>
+        </encoder>
+        <!--还需要配置一个滚动的策略-->
+        <!--使用TimeBasedRollingPolicy：按时间来滚动-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--配置路径-->
+            <fileNamePattern>
+                E:\log\sell\error.%d.log
+            </fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+
+    <!--指定使用配置-->
+    <!--接下来就是将小的配置项应用去哪-->
+    <!--root代表整个项目都适用-->
+    <root level="info">
+        <!--引用上面的name-->
+        <appender-ref ref="consoleLog"/>
+        <appender-ref ref="fileInfoLog"/>
+        <appender-ref ref="fileErrorLog"/>
+    </root>
+
+</configuration>

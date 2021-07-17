@@ -1,0 +1,28 @@
+spring:
+  # \u6570\u636E\u5E93\u76F8\u5173\u4FE1\u606F
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123456
+    url: jdbc:mysql://192.168.199.115/sell?characterEncoding=utf-8&useSSL=false
+
+  #JPA\u987E\u540D\u601D\u4E49\u5C31\u662FJava Persistence API\u7684\u610F\u601D\uFF0C\u662FJDK 5.0\u6CE8\u89E3\u6216XML\u63CF\u8FF0\u5BF9\u8C61\uFF0D\u5173\u7CFB\u8868\u7684\u6620\u5C04\u5173\u7CFB\uFF0C\u5E76\u5C06\u8FD0\u884C\u671F\u7684\u5B9E\u4F53\u5BF9\u8C61\u6301\u4E45\u5316\u5230\u6570\u636E\u5E93\u4E2D\u3002
+  #https://blog.csdn.net/wujiaqi0921/article/details/78789087
+  jpa:
+    show-sql: true
+
+#\u914D\u7F6E\u4E0A\u4E0B\u6587\u6839
+server:
+  servlet:
+    context-path: /sell #包名也叫上下文根
+
+
+#\u914D\u7F6E\u65E5\u5FD7\u6846\u67B6 %d\u8868\u793A\u65E5\u671F %msg\u8868\u793A\u4FE1\u606F %n\u8868\u793A\u6362\u884C [\u8BBE\u7F6Econsole\u6253\u51FA\u7684\u65E5\u5FD7\u4F1A\u660E\u663E\u53D8\u77ED]
+#logging:
+#  pattern:
+#    console: "%d - %msg%n"
+#  file:
+#    path: E:\log\sell.log
+#  level:
+#    com.ordersystem.LoggerTest: debug #\u6307\u5B9A\u7279\u5B9A\u7C7B\u7684\u7EA7\u522B\u662Fdebug
+#  level: debug \u6307\u5B9A\u65E5\u5FD7\u7EA7\u522B
